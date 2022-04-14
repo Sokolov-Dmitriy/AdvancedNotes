@@ -31,17 +31,21 @@ class NotesRepositoryImp : NotesRepository {
         listeners.forEach { it.invoke(this.getNotes()) }
     }
 
-    override fun getCurrentNoteById(id:Int): Note {
-        return notes.firstOrNull{it.id==id} ?: Note(-1,"error","error")
+    override fun getCurrentNoteById(id: Int): Note {
+        return notes.firstOrNull { it.id == id } ?: Note(-1, "error", "error")
     }
 
     override fun editNote(note: Note) {
-        if(notes.removeAll { it.id==note.id }){
-            println("delete")
+        if (notes.removeAll { it.id == note.id }) {
             notes.add(note)
             notifyListeners()
         }
 
+    }
+
+    override fun deleteNoteById(id: Int) {
+        notes.removeAll { it.id == id }
+        notifyListeners()
     }
 
     private val listeners: MutableList<NotesListener> = emptyList<NotesListener>().toMutableList()

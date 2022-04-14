@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sokolovds.myapplication.R
+import com.sokolovds.myapplication.base.BaseFragment
 import com.sokolovds.myapplication.databinding.MainFragmentBinding
 import com.sokolovds.myapplication.models.frafmentData.FragmentData
 import com.sokolovds.myapplication.screens.noteFragment.NoteFragment
@@ -16,7 +16,7 @@ import com.sokolovds.myapplication.utils.recyclerViewUtils.NotesAdapter
 import com.sokolovds.myapplication.utils.viewModelUtils.viewModelsFactory
 import kotlinx.parcelize.Parcelize
 
-class MainFragment : Fragment(R.layout.main_fragment) {
+class MainFragment : BaseFragment() {
 
     @Parcelize
     class Data : FragmentData

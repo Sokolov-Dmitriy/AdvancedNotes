@@ -18,4 +18,9 @@ class EditFragmentViewModel(
         repository.editNote(note)
         navigator.goBack()
     }
+
+    fun onDeletePressed(noteId:Int){
+        repository.deleteNoteById(noteId)
+        navigator.goBack()
+    }
 }

@@ -1,46 +1,44 @@
 package com.sokolovds.myapplication.screens.noteFragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import com.sokolovds.myapplication.R
+import com.sokolovds.myapplication.base.BaseNoteFragment
 import com.sokolovds.myapplication.databinding.NoteFragmentBinding
 import com.sokolovds.myapplication.models.Note
 import com.sokolovds.myapplication.models.frafmentData.FragmentData
 import com.sokolovds.myapplication.utils.viewModelUtils.viewModelsFactory
 import kotlinx.parcelize.Parcelize
 
-class NoteFragment:Fragment() {
+class NoteFragment : BaseNoteFragment() {
 
     @Parcelize
     class Data : FragmentData
 
-    private lateinit var binding: NoteFragmentBinding
     private val viewModel by viewModelsFactory<NoteFragmentViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = NoteFragmentBinding.inflate(inflater,container,false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         uiInit()
-
-        return binding.root
     }
 
-    private fun uiInit(){
+
+    private fun uiInit() {
         buttonsInit()
     }
 
-    private fun buttonsInit(){
+    private fun buttonsInit() {
         binding.saveBtn.setOnClickListener {
-            viewModel.onSavePressed(Note(
-                title = binding.title.text.toString(),
-                description = binding.noteText.text.toString()
-            ))
-            viewModel.navigator.goBack()
+            viewModel.onSavePressed(
+                Note(
+                    title = binding.title.text.toString(),
+                    description = binding.noteText.text.toString()
+                )
+            )
+        }
+        onDeleteAction = {
+            viewModel.onDeletePressed()
         }
 
     }

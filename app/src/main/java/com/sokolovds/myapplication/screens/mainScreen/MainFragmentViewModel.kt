@@ -15,15 +15,15 @@ import com.sokolovds.myapplication.utils.recyclerViewUtils.NotesAdapter
 class MainFragmentViewModel(
     val repository: NotesRepository,
     val navigator: Navigator
-):ViewModel(),NotesAdapter.AdapterListener {
+) : ViewModel(), NotesAdapter.AdapterListener {
 
-    private val _notes:MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
+    private val _notes: MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
     val notes: LiveData<List<Note>> = _notes
 
-    private val _currentNoteId:MutableLiveData<Int> = MutableLiveData<Int>()
-    val currentNoteId:LiveData<Int> = _currentNoteId
+    private val _currentNoteId: MutableLiveData<Int> = MutableLiveData<Int>()
+    val currentNoteId: LiveData<Int> = _currentNoteId
 
-    private val notesListener:NotesListener = {
+    private val notesListener: NotesListener = {
         _notes.postValue(it)
     }
 
@@ -34,9 +34,7 @@ class MainFragmentViewModel(
 
     override fun onCleared() {
         repository.removeListeners(notesListener)
-
         super.onCleared()
-        println("onCleared viewModel")
     }
 
     override fun onChangeId(id: Int) {

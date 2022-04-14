@@ -23,11 +23,11 @@ class ActivityActionsManager<T> {
 
     private val actionsQueue: MutableList<ActivityAction<T>> = mutableListOf()
 
-    operator fun invoke(activityAction: ActivityAction<T>){
+    operator fun invoke(activityAction: ActivityAction<T>) {
         val activity = this.activity
-        if(activity!=null){
+        if (activity != null) {
             activityAction(activity)
-        }else{
+        } else {
             actionsQueue.add(activityAction)
         }
     }

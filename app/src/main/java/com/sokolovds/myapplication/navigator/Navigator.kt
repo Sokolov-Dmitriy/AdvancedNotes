@@ -5,5 +5,5 @@ import com.sokolovds.myapplication.models.frafmentData.FragmentData
 interface Navigator {
     fun launchFragment(data: FragmentData)
 
-    fun goBack(result:Any?=null)
+    fun goBack(result: Any? = null)
 }

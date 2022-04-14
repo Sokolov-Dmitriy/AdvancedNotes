@@ -14,9 +14,11 @@ interface NotesRepository : Repository {
 
     fun notifyListeners()
 
-    fun getCurrentNoteById(id:Int): Note
+    fun getCurrentNoteById(id: Int): Note
 
-    fun editNote(note:Note)
+    fun editNote(note: Note)
+
+    fun deleteNoteById(id: Int)
 
 
 }

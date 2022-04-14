@@ -8,11 +8,9 @@ import com.sokolovds.myapplication.databinding.NoteItemBinding
 import com.sokolovds.myapplication.models.Note
 
 class NotesAdapter(
-    val listener:AdapterListener
-) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(),View.OnClickListener {
-    class NotesViewHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root){
-
-    }
+    val listener: AdapterListener
+) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(), View.OnClickListener {
+    class NotesViewHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     var notes: List<Note> = emptyList()
         set(value) {
@@ -47,7 +45,7 @@ class NotesAdapter(
 
     }
 
-    interface AdapterListener{
-        fun onChangeId(id:Int)
+    interface AdapterListener {
+        fun onChangeId(id: Int)
     }
 }

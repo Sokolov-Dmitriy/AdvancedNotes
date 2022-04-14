@@ -7,11 +7,16 @@ import com.sokolovds.myapplication.repository.NotesRepository
 
 class NoteFragmentViewModel(
     private val repository: NotesRepository,
-    val navigator: Navigator
-):ViewModel() {
+    private val navigator: Navigator
+) : ViewModel() {
 
-    fun onSavePressed(note:Note){
+    fun onSavePressed(note: Note) {
         repository.addNote(note)
+        navigator.goBack()
+    }
+
+    fun onDeletePressed() {
+        navigator.goBack()
     }
 
 }

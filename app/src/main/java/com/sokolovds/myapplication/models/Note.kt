@@ -6,7 +6,7 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class Note(
-    val id:Int = -1,
+    val id: Int = -1,
     val title: String,
     val description: String
-):Parcelable
+) : Parcelable

@@ -14,7 +14,11 @@ import com.sokolovds.myapplication.screens.mainScreen.MainFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    val viewModel by viewModels<MainActivityViewModel> { ViewModelProvider.AndroidViewModelFactory(application) }
+    private val viewModel by viewModels<MainActivityViewModel> {
+        ViewModelProvider.AndroidViewModelFactory(
+            application
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +28,21 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragmentContainer, MainFragment())
-//                .add(R.id.fragmentContainer, NoteFragment())
                 .commit()
         }
 
         setContentView(binding.root)
+        supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallBack, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentCallBack)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onResume() {
@@ -41,11 +55,19 @@ class MainActivity : AppCompatActivity() {
         viewModel.whenActivityActive.setUnActive()
     }
 
-    private fun notifyChanged(){
-
+    private fun notifyChanged() {
+        setDisplayHomeAsUp()
     }
 
-    private val fragmentCallBack = object : FragmentManager.FragmentLifecycleCallbacks(){
+    private fun setDisplayHomeAsUp() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
+    }
+
+    private val fragmentCallBack = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(
             fm: FragmentManager,
             f: Fragment,
