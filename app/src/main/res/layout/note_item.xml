@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_gravity="top"
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            tools:text="Список дел на завтра"
+            android:lines="2"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:layout_gravity="bottom"
+            android:id="@+id/noteDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:lines="4"
+            android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceBody2"
+            tools:text="-Убрать ыагштша цущша ощш ошацшщ =ца т щащ оа ао  уа оа ао  аоуаош шао ш шаоушао оац" />
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
