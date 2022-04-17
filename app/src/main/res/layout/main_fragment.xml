@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sokolovds.myapplication.presentation.screens.mainScreen.MainFragment">
 
     <ScrollView
         app:layout_constraintStart_toStartOf="parent"
