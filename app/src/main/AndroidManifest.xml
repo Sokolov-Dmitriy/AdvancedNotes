@@ -11,15 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdvancedNotes">
         <activity
-            android:name=".presentation.screens.MainActivity"
+            android:name=".presentation.screens.splash.SplashActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.screens.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+
     </application>
 
 </manifest>

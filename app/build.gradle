@@ -3,6 +3,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -63,7 +64,8 @@ dependencies {
     def koin_version= "3.1.6"
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.30")
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
 
 
 }

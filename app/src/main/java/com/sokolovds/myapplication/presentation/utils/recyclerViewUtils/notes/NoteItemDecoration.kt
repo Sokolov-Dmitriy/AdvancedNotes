@@ -1,4 +1,4 @@
-package com.sokolovds.myapplication.presentation.utils.recyclerViewUtils
+package com.sokolovds.myapplication.presentation.utils.recyclerViewUtils.notes
 
 import android.graphics.Rect
 import android.view.View

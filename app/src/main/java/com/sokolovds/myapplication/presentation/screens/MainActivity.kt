@@ -2,37 +2,26 @@ package com.sokolovds.myapplication.presentation.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.annotation.StringRes
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.sokolovds.myapplication.R
 import com.sokolovds.myapplication.databinding.ActivityMainBinding
-import com.sokolovds.myapplication.presentation.navigator.StackFragmentNavigator
-import com.sokolovds.myapplication.presentation.screens.mainScreen.MainFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navigator: StackFragmentNavigator
-
-    private val viewModel by viewModel<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navigator = StackFragmentNavigator(this, R.id.fragmentContainer) {
-            MainFragment.Data()
-        }
-        navigator.onCreate(savedInstanceState)
+        setStartDestination(
+            getMainNavigationGraphId(),
+            getNotesListDestination(),
+            getFragmentContainer()
+        )
 
-    }
-
-    override fun onDestroy() {
-        navigator.onDestroy()
-        super.onDestroy()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -40,15 +29,27 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.navigator.setNavigator(navigator)
+    private fun setStartDestination(
+        mainNavigationGraphId: Int,
+        destinationId: Int,
+        fragmentContainer: Int
+    ) {
+        val navController = getRootNavController(fragmentContainer)
+        val graph = navController.navInflater.inflate(mainNavigationGraphId)
+        graph.setStartDestination(destinationId)
+        navController.graph = graph
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.navigator.setNavigator(null)
+    private fun getRootNavController(containerId: Int): NavController {
+        val navHost =
+            supportFragmentManager.findFragmentById(containerId) as NavHostFragment
+        return navHost.navController
     }
 
+    private fun getMainNavigationGraphId() = R.navigation.nav_graph
+
+    private fun getNotesListDestination() = R.id.mainFragment
+
+    private fun getFragmentContainer() = R.id.fragmentContainer
 
 }

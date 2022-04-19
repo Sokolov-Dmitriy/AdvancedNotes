@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.sokolovds.myapplication.presentation.screens.mainScreen.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.sokolovds.myapplication.presentation.screens.noteFragment.AddNoteFragment"
+        android:label="NoteFragment" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.sokolovds.myapplication.presentation.screens.editNoteFragment.EditNoteFragment"
+        android:label="EditNoteFragment">
+        <argument
+            android:name="note"
+            app:argType="com.sokolovds.myapplication.presentation.models.NoteParcelize" />
+    </fragment>
+    <include app:graph="@navigation/settings_graph" />
+
+    <action
+        android:id="@+id/show_settings"
+        app:destination="@id/settings_graph" />
+
+
+</navigation>

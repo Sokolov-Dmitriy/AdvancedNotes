@@ -6,27 +6,36 @@ import com.sokolovds.myapplication.presentation.screens.MainActivityViewModel
 import com.sokolovds.myapplication.presentation.screens.editNoteFragment.EditFragmentViewModel
 import com.sokolovds.myapplication.presentation.screens.mainScreen.MainFragmentViewModel
 import com.sokolovds.myapplication.presentation.screens.noteFragment.NoteFragmentViewModel
+import com.sokolovds.myapplication.presentation.screens.settingsFragment.SettingsFragmentViewModel
+import com.sokolovds.myapplication.presentation.screens.splash.SplashFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 
 val appModule = module {
-    val vm = single<MainActivityViewModel> {
-        MainActivityViewModel(
-            navigator = NavigatorImp()
+
+    viewModel<SettingsFragmentViewModel> {
+        SettingsFragmentViewModel(
         )
-    } bind  Navigator::class
+    }
 
+    viewModel<SplashFragmentViewModel> {
+        SplashFragmentViewModel(
+        )
+    }
 
+    viewModel<MainActivityViewModel> {
+        MainActivityViewModel(
+        )
+    }
 
     viewModel<MainFragmentViewModel> {
         MainFragmentViewModel(
             addListenerUseCase = get(),
             removeListenerUseCase = get(),
             getAllNotesUseCase = get(),
-            getNoteByIdUseCase = get(),
-            navigator = get()
+            getNoteByIdUseCase = get()
 
         )
     }
@@ -34,21 +43,15 @@ val appModule = module {
     viewModel<EditFragmentViewModel> {
         EditFragmentViewModel(
             editNoteUseCase = get(),
-            deleteNoteByIdUseCase = get(),
-            navigator = get()
+            deleteNoteByIdUseCase = get()
         )
     }
 
     viewModel<NoteFragmentViewModel> {
         NoteFragmentViewModel(
-            addNoteUseCase = get(),
-            navigator = get()
-
+            addNoteUseCase = get()
         )
     }
-
-
-
 
 
 }

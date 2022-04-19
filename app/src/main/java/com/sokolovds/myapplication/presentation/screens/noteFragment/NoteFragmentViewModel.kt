@@ -7,17 +7,12 @@ import com.sokolovds.myapplication.presentation.navigator.Navigator
 import com.sokolovds.myapplication.presentation.navigator.NavigatorImp
 
 class NoteFragmentViewModel(
-    private val addNoteUseCase: AddNoteUseCase,
-    private val navigator: Navigator
+    private val addNoteUseCase: AddNoteUseCase
 ) : ViewModel() {
 
     fun onSavePressed(note: Note) {
         addNoteUseCase.execute(note)
-        navigator.goBack()
     }
 
-    fun onDeletePressed() {
-        navigator.goBack()
-    }
 
 }

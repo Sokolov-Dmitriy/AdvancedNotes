@@ -4,34 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sokolovds.myapplication.R
 import com.sokolovds.myapplication.presentation.base.BaseFragment
 import com.sokolovds.myapplication.databinding.MainFragmentBinding
-import com.sokolovds.myapplication.presentation.navigator.FragmentData
-import com.sokolovds.myapplication.presentation.screens.noteFragment.NoteFragment
-import com.sokolovds.myapplication.presentation.utils.recyclerViewUtils.NoteItemDecoration
-import com.sokolovds.myapplication.presentation.utils.recyclerViewUtils.NotesAdapter
-import kotlinx.parcelize.Parcelize
+import com.sokolovds.myapplication.presentation.utils.recyclerViewUtils.notes.NoteItemDecoration
+import com.sokolovds.myapplication.presentation.utils.recyclerViewUtils.notes.NotesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : BaseFragment() {
-
-    @Parcelize
-    class Data : FragmentData
+class MainFragment : BaseFragment<MainFragmentBinding>() {
 
     private val viewModel by viewModel<MainFragmentViewModel>()
-    private lateinit var binding: MainFragmentBinding
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         uiInit()
         buttonsInit()
-        return binding.root
     }
 
     private fun uiInit() {
@@ -40,12 +31,13 @@ class MainFragment : BaseFragment() {
 
     private fun buttonsInit() {
         binding.addNoteBtn.setOnClickListener {
-            viewModel.onAddNotePressed()
+            findNavController().navigate(R.id.action_mainFragment_to_noteFragment)
         }
+
     }
 
     private fun recyclerViewInit() {
-        val adapter = NotesAdapter(viewModel)
+        val adapter = NotesAdapter(findNavController())
         viewModel.notes.observe(viewLifecycleOwner) {
             adapter.notes = it
         }
@@ -61,4 +53,9 @@ class MainFragment : BaseFragment() {
             )
         }
     }
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = MainFragmentBinding.inflate(inflater, container, false)
 }
