@@ -5,12 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import com.sokolovds.myapplication.R
 import com.sokolovds.myapplication.databinding.NoteFragmentBinding
 
-typealias OnDeleteBtnAction = () -> Unit
 
-open class BaseNoteFragment : BaseFragment<NoteFragmentBinding>() {
+abstract class BaseNoteFragment<VM:BaseViewModel>() : BaseFragment<NoteFragmentBinding,VM>() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

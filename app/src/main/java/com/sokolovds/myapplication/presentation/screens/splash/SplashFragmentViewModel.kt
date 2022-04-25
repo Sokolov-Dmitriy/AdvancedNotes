@@ -12,7 +12,7 @@ class SplashFragmentViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _loadingState.postValue(false)
+            delay(1000)
             _loadingState.postValue(true)
         }
     }

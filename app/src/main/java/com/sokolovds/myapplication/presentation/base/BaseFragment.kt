@@ -2,18 +2,26 @@ package com.sokolovds.myapplication.presentation.base
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.sokolovds.myapplication.R
+import com.sokolovds.myapplication.presentation.navigator.NavigationAction
+import com.sokolovds.myapplication.presentation.navigator.observeNonNull
 
-abstract class BaseFragment<B : ViewBinding> : Fragment() {
+typealias OnDeleteBtnAction = () -> Unit
+
+abstract class BaseFragment<B : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     private var _binding: B? = null
     protected val binding get() = _binding!!
 
-    protected var onDeleteAction: OnDeleteBtnAction = {}
+    protected open val onDeleteAction: OnDeleteBtnAction = {}
+
+    protected abstract val viewModel: VM
 
     protected abstract fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): B
 
@@ -28,6 +36,7 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeNavigation()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
             findNavController().backQueue.size > 2
         )
@@ -71,4 +80,31 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         }
 
     }
+
+    private fun observeNavigation() {
+        viewModel.navigation.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { navigationCommand ->
+                handleNavigation(navigationCommand)
+            }
+        }
+    }
+
+    private fun handleNavigation(navAction: NavigationAction) {
+        when (navAction) {
+            is NavigationAction.ToDirection -> findNavController().navigate(navAction.directions)
+            is NavigationAction.Back -> findNavController().navigateUp()
+            is NavigationAction.ShowToast -> Toast.makeText(
+                requireContext(),
+                navAction.message,
+                Toast.LENGTH_SHORT
+            ).show()
+            is NavigationAction.ShowSnackBar -> Snackbar.make(
+                requireView(),
+                navAction.message,
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+
 }

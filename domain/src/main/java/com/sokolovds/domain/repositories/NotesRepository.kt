@@ -1,25 +1,17 @@
 package com.sokolovds.domain.repositories
 
 import com.sokolovds.domain.models.Note
+import kotlinx.coroutines.flow.Flow
 
 interface NotesRepository : Repository {
 
-    fun getNotes(): List<Note>
+    fun getNotes(): Flow<List<Note>>
 
-    fun addNote(note: Note)
+    suspend fun addNote(note: Note)
 
-    fun addListeners(listener: NotesListener)
+    suspend fun editNote(note: Note)
 
-    fun removeListeners(listener: NotesListener)
-
-    fun notifyListeners()
-
-    fun getNoteById(id: Int): Note
-
-    fun editNote(note: Note)
-
-    fun deleteNoteById(id: Int)
+    suspend fun deleteNoteById(id: Int)
 
 
 }
-typealias NotesListener = (List<Note>) -> Unit

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 class NoteItemDecoration(private val smallPadding: Int, private val largePadding: Int) :
     RecyclerView.ItemDecoration() {
 
-
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

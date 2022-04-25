@@ -6,30 +6,28 @@ import org.koin.dsl.module
 
 val domainModule = module {
     factory<AddNoteUseCase> {
-        AddNoteUseCase(repository = get())
-    }
-
-    factory<AddListenerUseCase> {
-        AddListenerUseCase(repository = get())
-    }
-
-    factory<RemoveListenerUseCase> {
-        RemoveListenerUseCase(repository = get())
+        AddNoteUseCase(
+            repository = get()
+        )
     }
 
     factory<DeleteNoteByIdUseCase> {
-        DeleteNoteByIdUseCase(repository = get())
+        DeleteNoteByIdUseCase(
+            repository = get()
+        )
     }
 
     factory<EditNoteUseCase> {
-        EditNoteUseCase(repository = get())
-    }
-
-    factory<GetNoteByIdUseCase> {
-        GetNoteByIdUseCase(repository = get())
+        EditNoteUseCase(
+            repository = get()
+        )
     }
 
     factory<GetAllNotesUseCase> {
-        GetAllNotesUseCase(repository = get())
+        GetAllNotesUseCase(
+            repository = get()
+        )
     }
+
+
 }

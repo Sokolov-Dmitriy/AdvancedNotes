@@ -5,4 +5,13 @@
     <string name="change_theme">Change Theme</string>
     <string name="settings">Settings</string>
     <string name="loading_app">Initializing app</string>
+    <string name="emptyTitleException">Note title is required!</string>
+    <string name="tryLoadException">Something went wrong, click "Retry" to reload!</string>
+    <string name="tryRepeatException">Something went wrong, try repeat operation!</string>
+    <string name="otherException">Something went wrong, try again later!</string>
+    <string name="retry">Retry</string>
+    <string name="save">Save</string>
+    <string name="note_description">Note description…</string>
+    <string name="note_title">Title</string>
+
 </resources>

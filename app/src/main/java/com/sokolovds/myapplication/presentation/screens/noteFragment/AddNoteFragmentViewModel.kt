@@ -1,20 +1,20 @@
-package com.sokolovds.myapplication.presentation.screens.editNoteFragment
+package com.sokolovds.myapplication.presentation.screens.noteFragment
 
 import androidx.lifecycle.viewModelScope
-import com.sokolovds.domain.useCases.DeleteNoteByIdUseCase
-import com.sokolovds.domain.useCases.EditNoteUseCase
+import com.sokolovds.domain.exceptions.*
 import com.sokolovds.domain.models.Note
 import com.sokolovds.domain.models.onError
 import com.sokolovds.domain.models.onSuccess
+import com.sokolovds.domain.useCases.AddNoteUseCase
 import com.sokolovds.myapplication.presentation.base.BaseViewModel
 import com.sokolovds.myapplication.presentation.utils.MessageProvider
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class EditFragmentViewModel(
-    private val editNoteUseCase: EditNoteUseCase,
-    private val deleteNoteByIdUseCase: DeleteNoteByIdUseCase,
+class AddNoteFragmentViewModel(
+    private val addNoteUseCase: AddNoteUseCase,
     private val messageProvider: MessageProvider
 ) : BaseViewModel() {
 
@@ -27,7 +27,7 @@ class EditFragmentViewModel(
 
     fun onSavePressed(note: Note) = viewModelScope.launch {
         _uiState.emit(UiState(true))
-        with(editNoteUseCase(note)) {
+        with(addNoteUseCase(note)) {
             onSuccess {
                 navigateBack()
             }
@@ -38,16 +38,10 @@ class EditFragmentViewModel(
         }
     }
 
-    fun onDeletePressed(id: Int) = viewModelScope.launch {
-        _uiState.emit(UiState(true))
-        with(deleteNoteByIdUseCase(id)) {
-            onSuccess {
-                navigateBack()
-            }
-            onError {
-                _uiState.emit(UiState(false))
-                showSnackBar(messageProvider.getMessageByException(it))
-            }
-        }
+
+    fun onDeletePressed() {
+        navigateBack()
     }
+
+
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Advanced Notes</string>
+    <string name="delete_note">Удалить заметку</string>
+    <string name="change_language">Выбор языка</string>
+    <string name="change_theme">Выбор темы</string>
+    <string name="settings">Настройки</string>
+    <string name="loading_app">Инициализация приложения</string>
+    <string name="emptyTitleException">Название заметки обяхательно!</string>
+    <string name="tryLoadException">Что-то пошло не так, нажмите "повторить", для перезагрузки!</string>
+    <string name="tryRepeatException">Что-то пошло не так, попробуйте повторить операцию!</string>
+    <string name="otherException">Что-то пошло не так, повторите операцию позже!</string>
+    <string name="retry">Повторить</string>
+    <string name="save">Сохранить</string>
+    <string name="note_description">Текст заметки…</string>
+    <string name="note_title">Название</string>
+
+</resources>
